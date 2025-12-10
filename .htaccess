@@ -1,0 +1,31 @@
+# .htaccess
+RewriteEngine On
+
+# Redirect to www (optional)
+# RewriteCond %{HTTP_HOST} !^www\. [NC]
+# RewriteRule ^(.*)$ http://www.%{HTTP_HOST}/$1 [R=301,L]
+
+# Remove trailing slash
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)/$ /$1 [L,R=301]
+
+# Front controller pattern
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ index.php?path=$1 [QSA,L]
+
+# Security headers
+Header set X-Content-Type-Options "nosniff"
+Header set X-Frame-Options "SAMEORIGIN"
+Header set X-XSS-Protection "1; mode=block"
+
+# Cache control for static files
+<FilesMatch "\.(css|js|jpg|jpeg|png|gif|ico|svg)$">
+    Header set Cache-Control "max-age=31536000, public"
+</FilesMatch>
+
+# Prevent access to sensitive files
+<FilesMatch "^(config\.php|database\.sql|\.htaccess)$">
+    Order allow,deny
+    Deny from all
+</FilesMatch>
