@@ -1,10 +1,11 @@
 <?php
-// contact.php
+// Include FIRST - before any HTML
 require_once 'includes/config.php';
 require_once 'includes/database.php';
 require_once 'includes/auth.php';
+include 'includes/header.php';
 
-$pageTitle = "Contact Us - Roncom Networking Store";
+$pageTitle = "Contact - Roncom Networking Store";
 $activePage = "contact";
 
 $db = new Database();
@@ -91,7 +92,6 @@ $contactInfo = [
     'hours' => 'Mon-Fri: 8:00 AM - 6:00 PM<br>Sat: 9:00 AM - 4:00 PM<br>Sun: Closed'
 ];
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -514,8 +514,7 @@ $contactInfo = [
     </style>
 </head>
 <body>
-    <!-- Header -->
-    <?php include 'includes/header.php'; ?>
+    <!-- Header already included above -->
 
     <!-- Hero Section -->
     <section class="contact-hero">
